@@ -7,6 +7,7 @@ select *, date_format(rental_date, "%M") as month
 from sakila.rental
 where date_format(rental_date, "%M") = 'May';
 
+
 -- to make sure we only have the month of May 
 select distinct month 
 from sakila.rental_may;
@@ -40,7 +41,7 @@ order by count(rental_id) desc;
 
 -- 5. Create a Python connection with SQL database and retrieve the results of the last two queries (also mentioned below) as dataframes:
 		-- a.Check the number of rentals for each customer for May
-create temporary table sakila.customer_rentals_may
+create table sakila.customer_rentals_may
 select concat(first_name, ' ', last_name) customer_full_name, count(rental_id) as rental_per_costumer 
 from sakila.rental_may rm
 left join sakila.customer c 
@@ -51,7 +52,7 @@ order by count(rental_id) desc;
 select* from sakila.customer_rentals_may;
 
 		-- b.Check the number of rentals for each customer for June
-create temporary table sakila.customer_rentals_june
+create table sakila.customer_rentals_june
 select concat(first_name, ' ', last_name) customer_full_name, count(rental_id) as rental_per_costumer 
 from sakila.rental_june rm
 left join sakila.customer c 
@@ -60,6 +61,8 @@ group by rm.customer_id
 order by count(rental_id) desc;
 
 select* from sakila.customer_rentals_june;
+select * from sakila.actor;
+
 
 
 -- 6.Write a function that checks if customer borrowed more or less films in the month of June as compared to May.
